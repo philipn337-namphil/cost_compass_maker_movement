@@ -37,17 +37,7 @@ TRIZ의 **시간 분리**와 **공간 분리**로 풀었다. 구체화를 비교
 
 다섯 개의 오픈소스를 **설계안에서 화면까지 이어지는 한 줄기**로 연결했다.
 
-```
-   설계안          비용            지표            화면
-     │              │               │               │
- ┌───▼────┐    ┌────▼─────┐   ┌─────▼────┐   ┌──────▼──────┐
- │OpenTofu│───▶│ Infracost│──▶│  pandas  │──▶│  Streamlit  │
- │  .tf   │    │   JSON   │   │  비교표  │   │   + Plotly  │
- └────────┘    └──────────┘   └──────────┘   └─────────────┘
-                     ▲
-            infracost-usage.yml
-            (트래픽 등 사용량 가정)
-```
+![오픈소스 파이프라인](fig_2_1_pipeline.png)
 
 | 오픈소스 | 역할 | 라이선스 |
 |---|---|---|
@@ -56,6 +46,10 @@ TRIZ의 **시간 분리**와 **공간 분리**로 풀었다. 구체화를 비교
 | [pandas](https://github.com/pandas-dev/pandas) | JSON을 설계안×비용 비교표로 | BSD-3-Clause |
 | [Plotly](https://github.com/plotly/plotly.py) | 비용 구성을 차트로 | MIT |
 | [Streamlit](https://github.com/streamlit/streamlit) | 트래픽 슬라이더로 직접 조작 | Apache-2.0 |
+
+Infracost는 클라우드 계정에 접속하지 않고 **코드만 로컬에서 파싱**해 비용을 계산한다. 외부로 나가는 것은 단가 조회뿐이다.
+
+![Infracost 동작 흐름](fig_2_2_infracost_flow.png)
 
 **새롭게 의미를 부여한 지점:** Infracost는 원래 실무 엔지니어가 **이미 작성한 코드의 비용 변화를 통제**하는 도구다. 이 프로젝트는 사용자를 *크레딧으로 실습하는 학생*으로, 사용 시점을 *설계 확정 이전*으로 옮겨, **아직 정하지 않은 설계를 고르는** 도구로 바꾸었다.
 
@@ -147,8 +141,9 @@ infracost breakdown --config-file infracost.yml --format json --out-file result.
 # 3. 비교표 (보고서 표 5-3 형태의 마크다운으로 출력)
 python analyze.py result.json
 
-# 4. 그림 3장 생성 (PNG + HTML)
+# 4. 그림 생성 — 측정 결과 차트 3장, 구조 다이어그램 2장
 python make_figures.py
+python make_diagrams.py
 
 # 5. 화면 띄우기
 streamlit run app.py
@@ -168,10 +163,12 @@ streamlit run app.py
 ├── infracost-large.yml             실험: t3.large
 ├── infracost-db-supported.yml      실험: 확장 지원 없는 엔진 버전
 ├── analyze.py                      JSON → 비교표
-├── charts.py / make_figures.py     차트 생성
+├── charts.py / make_figures.py     측정 결과 차트
+├── make_diagrams.py                구조 다이어그램
 ├── app.py                          Streamlit 화면
 ├── result*.json                    실제 측정 결과 (재현 검증용)
-├── fig_5_*.png                     보고서에 쓴 그림
+├── fig_2_*.png                     파이프라인 · Infracost 동작 흐름
+├── fig_5_*.png                     측정 결과 차트
 └── docs/
     ├── report.md                   보고서 본문
     └── HOWTO.md                    실행 방법 상세
