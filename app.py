@@ -18,6 +18,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import shutil
 import subprocess
@@ -33,10 +34,24 @@ from charts import stacked_resource_bar, total_comparison_bar, traffic_curve
 ROOT = Path(__file__).parent
 BASE_CONFIG = ROOT / "infracost.yml"
 BASE_USAGE = ROOT / "infracost-usage.yml"
-TMP_USAGE = ROOT / ".cc_usage.tmp.yml"
-TMP_CONFIG = ROOT / ".cc_config.tmp.yml"
-TMP_RESULT = ROOT / ".cc_result.tmp.json"
 CACHED_RESULT = ROOT / "result.json"
+
+
+def temp_paths(traffic_gb, instance_type, traffic_key):
+    """설정 조합마다 다른 임시 파일 이름을 쓴다.
+
+    캐시(@st.cache_data)는 infracost를 다시 돌리지 않고 결과 '경로'만
+    돌려준다. 모든 조합이 같은 파일을 쓰면, 나중 실행이 그 파일을
+    덮어쓴 뒤 캐시가 적중했을 때 엉뚱한 결과를 읽게 된다.
+    """
+    key = hashlib.md5(
+        f"{traffic_gb}|{instance_type}|{traffic_key}".encode("utf-8")
+    ).hexdigest()[:8]
+    return (
+        ROOT / f".cc_usage.{key}.tmp.yml",
+        ROOT / f".cc_config.{key}.tmp.yml",
+        ROOT / f".cc_result.{key}.tmp.json",
+    )
 
 # 트래픽 가정이 들어가는 키. --sync-usage-file 로 만든 파일에서
 # 이 이름이 다르면 사이드바에서 바꿀 수 있게 해 둔다.
@@ -67,7 +82,7 @@ def set_key_everywhere(node, key, value):
     return changed
 
 
-def write_temp_usage(traffic_gb, traffic_key):
+def write_temp_usage(traffic_gb, traffic_key, tmp_usage):
     """기존 사용량 파일을 읽어 트래픽 값만 바꾼 임시 파일을 만든다."""
     try:
         import yaml
@@ -87,12 +102,12 @@ def write_temp_usage(traffic_gb, traffic_key):
         data.setdefault("resource_type_default_usage", {}) \
             .setdefault("aws_lb", {})[traffic_key] = traffic_gb
 
-    TMP_USAGE.write_text(yaml.safe_dump(data, allow_unicode=True, sort_keys=False),
+    tmp_usage.write_text(yaml.safe_dump(data, allow_unicode=True, sort_keys=False),
                          encoding="utf-8")
     return changed
 
 
-def write_temp_config(instance_type=None):
+def write_temp_config(tmp_usage, tmp_config, instance_type=None):
     """임시 사용량 파일과 변수값을 담은 설정 파일을 만든다.
 
     주의: infracost의 --config-file 은 --terraform-var / --usage-file 플래그와
@@ -107,11 +122,11 @@ def write_temp_config(instance_type=None):
 
     cfg = yaml.safe_load(BASE_CONFIG.read_text(encoding="utf-8")) or {}
     for proj in cfg.get("projects", []):
-        proj["usage_file"] = TMP_USAGE.name
+        proj["usage_file"] = tmp_usage.name
         if instance_type:
             proj.setdefault("terraform_vars", {})["instance_type"] = instance_type
 
-    TMP_CONFIG.write_text(yaml.safe_dump(cfg, allow_unicode=True, sort_keys=False),
+    tmp_config.write_text(yaml.safe_dump(cfg, allow_unicode=True, sort_keys=False),
                           encoding="utf-8")
 
 
@@ -128,20 +143,23 @@ def run_infracost(traffic_gb, instance_type, traffic_key):
             "설치 후 `infracost auth login` 까지 마친 뒤 다시 실행하세요."
         )
 
-    write_temp_usage(traffic_gb, traffic_key)
-    write_temp_config(instance_type)
+    tmp_usage, tmp_config, tmp_result = temp_paths(
+        traffic_gb, instance_type, traffic_key)
+
+    write_temp_usage(traffic_gb, traffic_key, tmp_usage)
+    write_temp_config(tmp_usage, tmp_config, instance_type)
 
     cmd = [
         "infracost", "breakdown",
-        "--config-file", str(TMP_CONFIG.name),
+        "--config-file", tmp_config.name,
         "--format", "json",
-        "--out-file", str(TMP_RESULT.name),
+        "--out-file", tmp_result.name,
     ]
 
     proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True,
                           encoding="utf-8", errors="replace")
 
-    if proc.returncode != 0 or not TMP_RESULT.exists():
+    if proc.returncode != 0 or not tmp_result.exists():
         message = (proc.stderr or proc.stdout or "").strip()
         if "API_KEY" in message.upper():
             raise RuntimeError(
@@ -152,7 +170,7 @@ def run_infracost(traffic_gb, instance_type, traffic_key):
             )
         raise RuntimeError(f"infracost 실행 실패 (코드 {proc.returncode})\n\n{message[:2000]}")
 
-    return str(TMP_RESULT), None
+    return str(tmp_result), None
 
 
 # ---------------------------------------------------------------------

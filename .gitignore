@@ -9,9 +9,8 @@ venv/
 **/.infracost/
 
 # Streamlit 앱이 만드는 임시 파일
-.cc_usage.tmp.yml
-.cc_config.tmp.yml
-.cc_result.tmp.json
+.cc_*.tmp.yml
+.cc_*.tmp.json
 .streamlit/
 
 # Plotly HTML (plotly.js 가 내장되어 파일당 약 4.8MB)
