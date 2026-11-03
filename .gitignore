@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Infracost 로컬 캐시
+.infracost/
+**/.infracost/
+
+# Streamlit 앱이 만드는 임시 파일
+.cc_usage.tmp.yml
+.cc_config.tmp.yml
+.cc_result.tmp.json
+.streamlit/
+
+# Plotly HTML (plotly.js 가 내장되어 파일당 약 4.8MB)
+# PNG 만 올리고, 필요하면 `python make_figures.py` 로 다시 만든다.
+*.html
+
+# Terraform (이 저장소는 비용 추정 전용이라 apply 하지 않는다)
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# OS
+Thumbs.db
+.DS_Store

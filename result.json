@@ -1,0 +1,1251 @@
+{
+  "version": "0.2",
+  "metadata": {
+    "infracostCommand": "breakdown",
+    "vcsBranch": "",
+    "vcsCommitSha": "",
+    "vcsCommitAuthorName": "",
+    "vcsCommitAuthorEmail": "",
+    "vcsCommitTimestamp": "0001-01-01T00:00:00Z",
+    "vcsCommitMessage": "",
+    "configFilePath": "infracost.yml",
+    "configFileHasUsageFile": true
+  },
+  "currency": "USD",
+  "projects": [
+    {
+      "name": "A안_최소구성",
+      "displayName": "A안_최소구성",
+      "metadata": {
+        "path": "design-a",
+        "type": "terraform_dir",
+        "policySha": "f3a018c2502fbc8e10f4f356272c7bea45aac436",
+        "pastPolicySha": "f3a018c2502fbc8e10f4f356272c7bea45aac436",
+        "terraformModulePath": "design-a",
+        "providers": [
+          {
+            "name": "aws",
+            "filename": "design-a\\main.tf",
+            "startLine": 20,
+            "endLine": 27
+          }
+        ]
+      },
+      "pastBreakdown": {
+        "resources": [
+          {
+            "name": "aws_instance.app",
+            "resourceType": "aws_instance",
+            "tags": {
+              "Design": "A",
+              "Name": "design-a-app"
+            },
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-a\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_instance.app",
+                  "endLine": 72,
+                  "filename": "design-a\\main.tf",
+                  "startLine": 59
+                }
+              ],
+              "checksum": "d989862b5c09a70d71f1ff7506d257bc23fff116aae1a25993b555b8f7b723e3",
+              "endLine": 72,
+              "filename": "design-a\\main.tf",
+              "startLine": 59
+            },
+            "hourlyCost": "0.02974794520547945168",
+            "monthlyCost": "21.716",
+            "costComponents": [
+              {
+                "name": "Instance usage (Linux/UNIX, on-demand, t3.small)",
+                "unit": "hours",
+                "hourlyQuantity": "1",
+                "monthlyQuantity": "730",
+                "price": "0.026",
+                "hourlyCost": "0.026",
+                "monthlyCost": "18.98",
+                "priceNotFound": false
+              },
+              {
+                "name": "CPU credits",
+                "unit": "vCPU-hours",
+                "hourlyQuantity": "0",
+                "monthlyQuantity": "0",
+                "price": "0.05",
+                "hourlyCost": "0",
+                "monthlyCost": "0",
+                "priceNotFound": false
+              }
+            ],
+            "subresources": [
+              {
+                "name": "root_block_device",
+                "metadata": {},
+                "hourlyCost": "0.00374794520547945168",
+                "monthlyCost": "2.736",
+                "costComponents": [
+                  {
+                    "name": "Storage (general purpose SSD, gp3)",
+                    "unit": "GB",
+                    "hourlyQuantity": "0.0410958904109589",
+                    "monthlyQuantity": "30",
+                    "price": "0.0912",
+                    "hourlyCost": "0.00374794520547945168",
+                    "monthlyCost": "2.736",
+                    "priceNotFound": false
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "freeResources": [
+          {
+            "name": "aws_eip.app",
+            "resourceType": "aws_eip",
+            "tags": {
+              "Design": "A",
+              "Name": "design-a-eip"
+            },
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-a\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_eip.app",
+                  "endLine": 83,
+                  "filename": "design-a\\main.tf",
+                  "startLine": 75
+                }
+              ],
+              "checksum": "e8abbf6beeffd9cd929db0c98fa1317c7a5dd7eef98a673932a6a556921bd423",
+              "endLine": 83,
+              "filename": "design-a\\main.tf",
+              "startLine": 75
+            }
+          }
+        ],
+        "totalHourlyCost": "0.02974794520547945168",
+        "totalMonthlyCost": "21.716",
+        "totalMonthlyUsageCost": "0"
+      },
+      "breakdown": {
+        "resources": [
+          {
+            "name": "aws_instance.app",
+            "resourceType": "aws_instance",
+            "tags": {
+              "Design": "A",
+              "Name": "design-a-app"
+            },
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-a\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_instance.app",
+                  "endLine": 72,
+                  "filename": "design-a\\main.tf",
+                  "startLine": 59
+                }
+              ],
+              "checksum": "d989862b5c09a70d71f1ff7506d257bc23fff116aae1a25993b555b8f7b723e3",
+              "endLine": 72,
+              "filename": "design-a\\main.tf",
+              "startLine": 59
+            },
+            "hourlyCost": "0.02974794520547945168",
+            "monthlyCost": "21.716",
+            "costComponents": [
+              {
+                "name": "Instance usage (Linux/UNIX, on-demand, t3.small)",
+                "unit": "hours",
+                "hourlyQuantity": "1",
+                "monthlyQuantity": "730",
+                "price": "0.026",
+                "hourlyCost": "0.026",
+                "monthlyCost": "18.98",
+                "priceNotFound": false
+              },
+              {
+                "name": "CPU credits",
+                "unit": "vCPU-hours",
+                "hourlyQuantity": "0",
+                "monthlyQuantity": "0",
+                "price": "0.05",
+                "hourlyCost": "0",
+                "monthlyCost": "0",
+                "priceNotFound": false
+              }
+            ],
+            "subresources": [
+              {
+                "name": "root_block_device",
+                "metadata": {},
+                "hourlyCost": "0.00374794520547945168",
+                "monthlyCost": "2.736",
+                "costComponents": [
+                  {
+                    "name": "Storage (general purpose SSD, gp3)",
+                    "unit": "GB",
+                    "hourlyQuantity": "0.0410958904109589",
+                    "monthlyQuantity": "30",
+                    "price": "0.0912",
+                    "hourlyCost": "0.00374794520547945168",
+                    "monthlyCost": "2.736",
+                    "priceNotFound": false
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "freeResources": [
+          {
+            "name": "aws_eip.app",
+            "resourceType": "aws_eip",
+            "tags": {
+              "Design": "A",
+              "Name": "design-a-eip"
+            },
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-a\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_eip.app",
+                  "endLine": 83,
+                  "filename": "design-a\\main.tf",
+                  "startLine": 75
+                }
+              ],
+              "checksum": "e8abbf6beeffd9cd929db0c98fa1317c7a5dd7eef98a673932a6a556921bd423",
+              "endLine": 83,
+              "filename": "design-a\\main.tf",
+              "startLine": 75
+            }
+          }
+        ],
+        "totalHourlyCost": "0.02974794520547945168",
+        "totalMonthlyCost": "21.716",
+        "totalMonthlyUsageCost": "0"
+      },
+      "diff": {
+        "resources": [],
+        "totalHourlyCost": "0",
+        "totalMonthlyCost": "0",
+        "totalMonthlyUsageCost": "0"
+      },
+      "summary": {
+        "totalDetectedResources": 2,
+        "totalSupportedResources": 1,
+        "totalUnsupportedResources": 0,
+        "totalUsageBasedResources": 1,
+        "totalNoPriceResources": 1,
+        "unsupportedResourceCounts": {},
+        "noPriceResourceCounts": {
+          "aws_eip": 1
+        }
+      }
+    },
+    {
+      "name": "B안_가용성구성",
+      "displayName": "B안_가용성구성",
+      "metadata": {
+        "path": "design-b",
+        "type": "terraform_dir",
+        "policySha": "6cec019df466bc285b84f59e8aba7fdd15622ce8",
+        "pastPolicySha": "6cec019df466bc285b84f59e8aba7fdd15622ce8",
+        "terraformModulePath": "design-b",
+        "providers": [
+          {
+            "name": "aws",
+            "filename": "design-b\\main.tf",
+            "startLine": 20,
+            "endLine": 27
+          }
+        ]
+      },
+      "pastBreakdown": {
+        "resources": [
+          {
+            "name": "aws_autoscaling_group.app",
+            "resourceType": "aws_autoscaling_group",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-b\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_autoscaling_group.app",
+                  "endLine": 135,
+                  "filename": "design-b\\main.tf",
+                  "startLine": 122
+                }
+              ],
+              "checksum": "1c6c48fafb9b018af93908e630a24f305280d751cbd15ceba9f8e22a44d27412",
+              "endLine": 135,
+              "filename": "design-b\\main.tf",
+              "startLine": 122
+            },
+            "hourlyCost": "0.05949589041095890336",
+            "monthlyCost": "43.432",
+            "subresources": [
+              {
+                "name": "aws_launch_template.app",
+                "metadata": {},
+                "hourlyCost": "0.05949589041095890336",
+                "monthlyCost": "43.432",
+                "costComponents": [
+                  {
+                    "name": "Instance usage (Linux/UNIX, on-demand, t3.small)",
+                    "unit": "hours",
+                    "hourlyQuantity": "2",
+                    "monthlyQuantity": "1460",
+                    "price": "0.026",
+                    "hourlyCost": "0.052",
+                    "monthlyCost": "37.96",
+                    "priceNotFound": false
+                  },
+                  {
+                    "name": "CPU credits",
+                    "unit": "vCPU-hours",
+                    "hourlyQuantity": "0",
+                    "monthlyQuantity": "0",
+                    "price": "0.05",
+                    "hourlyCost": "0",
+                    "monthlyCost": "0",
+                    "priceNotFound": false
+                  }
+                ],
+                "subresources": [
+                  {
+                    "name": "block_device_mapping[0]",
+                    "metadata": {},
+                    "hourlyCost": "0.00749589041095890336",
+                    "monthlyCost": "5.472",
+                    "costComponents": [
+                      {
+                        "name": "Storage (general purpose SSD, gp3)",
+                        "unit": "GB",
+                        "hourlyQuantity": "0.0821917808219178",
+                        "monthlyQuantity": "60",
+                        "price": "0.0912",
+                        "hourlyCost": "0.00749589041095890336",
+                        "monthlyCost": "5.472",
+                        "priceNotFound": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "aws_lb.app",
+            "resourceType": "aws_lb",
+            "tags": {
+              "Design": "B",
+              "Name": "design-b-alb"
+            },
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-b\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb.app",
+                  "endLine": 84,
+                  "filename": "design-b\\main.tf",
+                  "startLine": 74
+                }
+              ],
+              "checksum": "77a557b9589fb69cafe3984076f2510ac203289cae2aed9537e2ac9d48e104f6",
+              "endLine": 84,
+              "filename": "design-b\\main.tf",
+              "startLine": 74
+            },
+            "hourlyCost": "0.023595890410958904",
+            "monthlyCost": "17.225",
+            "monthlyUsageCost": "0.8",
+            "costComponents": [
+              {
+                "name": "Application load balancer",
+                "unit": "hours",
+                "hourlyQuantity": "1",
+                "monthlyQuantity": "730",
+                "price": "0.0225",
+                "hourlyCost": "0.0225",
+                "monthlyCost": "16.425",
+                "priceNotFound": false
+              },
+              {
+                "name": "Load balancer capacity units",
+                "unit": "LCU",
+                "hourlyQuantity": "0.0001876524676299",
+                "monthlyQuantity": "0.136986301369863",
+                "price": "5.84",
+                "hourlyCost": "0.001095890410958904",
+                "monthlyCost": "0.8",
+                "usageBased": true,
+                "priceNotFound": false
+              }
+            ]
+          }
+        ],
+        "freeResources": [
+          {
+            "name": "aws_launch_template.app",
+            "resourceType": "aws_launch_template",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-b\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_launch_template.app",
+                  "endLine": 120,
+                  "filename": "design-b\\main.tf",
+                  "startLine": 107
+                }
+              ],
+              "checksum": "1ced10dd927e7275cc30120b88e51071edf1efa38a9de5c106dbb9ad5314f57d",
+              "endLine": 120,
+              "filename": "design-b\\main.tf",
+              "startLine": 107
+            }
+          },
+          {
+            "name": "aws_lb_listener.http",
+            "resourceType": "aws_lb_listener",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-b\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb_listener.http",
+                  "endLine": 102,
+                  "filename": "design-b\\main.tf",
+                  "startLine": 93
+                }
+              ],
+              "checksum": "9b41596ceefdfbfbce1f4322c1c5f096c46d8313e4736d4aa9a94e4535201bb0",
+              "endLine": 102,
+              "filename": "design-b\\main.tf",
+              "startLine": 93
+            }
+          },
+          {
+            "name": "aws_lb_target_group.app",
+            "resourceType": "aws_lb_target_group",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-b\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb_target_group.app",
+                  "endLine": 91,
+                  "filename": "design-b\\main.tf",
+                  "startLine": 86
+                }
+              ],
+              "checksum": "b87ef984bd32f7f2f4c8b7b3db460186f8309149c8e5e9ba65cc24cf66a35b5a",
+              "endLine": 91,
+              "filename": "design-b\\main.tf",
+              "startLine": 86
+            }
+          }
+        ],
+        "totalHourlyCost": "0.08309178082191780736",
+        "totalMonthlyCost": "60.657",
+        "totalMonthlyUsageCost": "0.8"
+      },
+      "breakdown": {
+        "resources": [
+          {
+            "name": "aws_autoscaling_group.app",
+            "resourceType": "aws_autoscaling_group",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-b\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_autoscaling_group.app",
+                  "endLine": 135,
+                  "filename": "design-b\\main.tf",
+                  "startLine": 122
+                }
+              ],
+              "checksum": "1c6c48fafb9b018af93908e630a24f305280d751cbd15ceba9f8e22a44d27412",
+              "endLine": 135,
+              "filename": "design-b\\main.tf",
+              "startLine": 122
+            },
+            "hourlyCost": "0.05949589041095890336",
+            "monthlyCost": "43.432",
+            "subresources": [
+              {
+                "name": "aws_launch_template.app",
+                "metadata": {},
+                "hourlyCost": "0.05949589041095890336",
+                "monthlyCost": "43.432",
+                "costComponents": [
+                  {
+                    "name": "Instance usage (Linux/UNIX, on-demand, t3.small)",
+                    "unit": "hours",
+                    "hourlyQuantity": "2",
+                    "monthlyQuantity": "1460",
+                    "price": "0.026",
+                    "hourlyCost": "0.052",
+                    "monthlyCost": "37.96",
+                    "priceNotFound": false
+                  },
+                  {
+                    "name": "CPU credits",
+                    "unit": "vCPU-hours",
+                    "hourlyQuantity": "0",
+                    "monthlyQuantity": "0",
+                    "price": "0.05",
+                    "hourlyCost": "0",
+                    "monthlyCost": "0",
+                    "priceNotFound": false
+                  }
+                ],
+                "subresources": [
+                  {
+                    "name": "block_device_mapping[0]",
+                    "metadata": {},
+                    "hourlyCost": "0.00749589041095890336",
+                    "monthlyCost": "5.472",
+                    "costComponents": [
+                      {
+                        "name": "Storage (general purpose SSD, gp3)",
+                        "unit": "GB",
+                        "hourlyQuantity": "0.0821917808219178",
+                        "monthlyQuantity": "60",
+                        "price": "0.0912",
+                        "hourlyCost": "0.00749589041095890336",
+                        "monthlyCost": "5.472",
+                        "priceNotFound": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "aws_lb.app",
+            "resourceType": "aws_lb",
+            "tags": {
+              "Design": "B",
+              "Name": "design-b-alb"
+            },
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-b\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb.app",
+                  "endLine": 84,
+                  "filename": "design-b\\main.tf",
+                  "startLine": 74
+                }
+              ],
+              "checksum": "77a557b9589fb69cafe3984076f2510ac203289cae2aed9537e2ac9d48e104f6",
+              "endLine": 84,
+              "filename": "design-b\\main.tf",
+              "startLine": 74
+            },
+            "hourlyCost": "0.023595890410958904",
+            "monthlyCost": "17.225",
+            "monthlyUsageCost": "0.8",
+            "costComponents": [
+              {
+                "name": "Application load balancer",
+                "unit": "hours",
+                "hourlyQuantity": "1",
+                "monthlyQuantity": "730",
+                "price": "0.0225",
+                "hourlyCost": "0.0225",
+                "monthlyCost": "16.425",
+                "priceNotFound": false
+              },
+              {
+                "name": "Load balancer capacity units",
+                "unit": "LCU",
+                "hourlyQuantity": "0.0001876524676299",
+                "monthlyQuantity": "0.136986301369863",
+                "price": "5.84",
+                "hourlyCost": "0.001095890410958904",
+                "monthlyCost": "0.8",
+                "usageBased": true,
+                "priceNotFound": false
+              }
+            ]
+          }
+        ],
+        "freeResources": [
+          {
+            "name": "aws_launch_template.app",
+            "resourceType": "aws_launch_template",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-b\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_launch_template.app",
+                  "endLine": 120,
+                  "filename": "design-b\\main.tf",
+                  "startLine": 107
+                }
+              ],
+              "checksum": "1ced10dd927e7275cc30120b88e51071edf1efa38a9de5c106dbb9ad5314f57d",
+              "endLine": 120,
+              "filename": "design-b\\main.tf",
+              "startLine": 107
+            }
+          },
+          {
+            "name": "aws_lb_listener.http",
+            "resourceType": "aws_lb_listener",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-b\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb_listener.http",
+                  "endLine": 102,
+                  "filename": "design-b\\main.tf",
+                  "startLine": 93
+                }
+              ],
+              "checksum": "9b41596ceefdfbfbce1f4322c1c5f096c46d8313e4736d4aa9a94e4535201bb0",
+              "endLine": 102,
+              "filename": "design-b\\main.tf",
+              "startLine": 93
+            }
+          },
+          {
+            "name": "aws_lb_target_group.app",
+            "resourceType": "aws_lb_target_group",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-b\\main.tf:20",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb_target_group.app",
+                  "endLine": 91,
+                  "filename": "design-b\\main.tf",
+                  "startLine": 86
+                }
+              ],
+              "checksum": "b87ef984bd32f7f2f4c8b7b3db460186f8309149c8e5e9ba65cc24cf66a35b5a",
+              "endLine": 91,
+              "filename": "design-b\\main.tf",
+              "startLine": 86
+            }
+          }
+        ],
+        "totalHourlyCost": "0.08309178082191780736",
+        "totalMonthlyCost": "60.657",
+        "totalMonthlyUsageCost": "0.8"
+      },
+      "diff": {
+        "resources": [],
+        "totalHourlyCost": "0",
+        "totalMonthlyCost": "0",
+        "totalMonthlyUsageCost": "0"
+      },
+      "summary": {
+        "totalDetectedResources": 5,
+        "totalSupportedResources": 2,
+        "totalUnsupportedResources": 0,
+        "totalUsageBasedResources": 2,
+        "totalNoPriceResources": 3,
+        "unsupportedResourceCounts": {},
+        "noPriceResourceCounts": {
+          "aws_launch_template": 1,
+          "aws_lb_listener": 1,
+          "aws_lb_target_group": 1
+        }
+      }
+    },
+    {
+      "name": "C안_관리형구성",
+      "displayName": "C안_관리형구성",
+      "metadata": {
+        "path": "design-c",
+        "type": "terraform_dir",
+        "policySha": "3e775c2e96a95ca0e363854d549250abd09da9cf",
+        "pastPolicySha": "3e775c2e96a95ca0e363854d549250abd09da9cf",
+        "terraformModulePath": "design-c",
+        "providers": [
+          {
+            "name": "aws",
+            "filename": "design-c\\main.tf",
+            "startLine": 19,
+            "endLine": 26
+          }
+        ]
+      },
+      "pastBreakdown": {
+        "resources": [
+          {
+            "name": "aws_db_instance.app",
+            "resourceType": "aws_db_instance",
+            "tags": {
+              "Design": "C",
+              "Name": "design-c-db"
+            },
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_db_instance.app",
+                  "endLine": 187,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 170
+                }
+              ],
+              "checksum": "755c45292fe86098c48cea5daa78594d44e2eaf3f361237afb20c0d50c441efe",
+              "endLine": 187,
+              "filename": "design-c\\main.tf",
+              "startLine": 170
+            },
+            "hourlyCost": "0.2695890410958904106",
+            "monthlyCost": "196.8",
+            "costComponents": [
+              {
+                "name": "Database instance (on-demand, Single-AZ, db.t3.micro)",
+                "unit": "hours",
+                "hourlyQuantity": "1",
+                "monthlyQuantity": "730",
+                "price": "0.026",
+                "hourlyCost": "0.026",
+                "monthlyCost": "18.98",
+                "priceNotFound": false
+              },
+              {
+                "name": "Storage (general purpose SSD, gp3)",
+                "unit": "GB",
+                "hourlyQuantity": "0.0273972602739726",
+                "monthlyQuantity": "20",
+                "price": "0.131",
+                "hourlyCost": "0.0035890410958904106",
+                "monthlyCost": "2.62",
+                "priceNotFound": false
+              },
+              {
+                "name": "Extended support (year 1)",
+                "unit": "vCPU-hours",
+                "hourlyQuantity": "2",
+                "monthlyQuantity": "1460",
+                "price": "0.12",
+                "hourlyCost": "0.24",
+                "monthlyCost": "175.2",
+                "priceNotFound": false
+              }
+            ]
+          },
+          {
+            "name": "aws_autoscaling_group.app",
+            "resourceType": "aws_autoscaling_group",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_autoscaling_group.app",
+                  "endLine": 165,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 152
+                }
+              ],
+              "checksum": "1c6c48fafb9b018af93908e630a24f305280d751cbd15ceba9f8e22a44d27412",
+              "endLine": 165,
+              "filename": "design-c\\main.tf",
+              "startLine": 152
+            },
+            "hourlyCost": "0.05949589041095890336",
+            "monthlyCost": "43.432",
+            "subresources": [
+              {
+                "name": "aws_launch_template.app",
+                "metadata": {},
+                "hourlyCost": "0.05949589041095890336",
+                "monthlyCost": "43.432",
+                "costComponents": [
+                  {
+                    "name": "Instance usage (Linux/UNIX, on-demand, t3.small)",
+                    "unit": "hours",
+                    "hourlyQuantity": "2",
+                    "monthlyQuantity": "1460",
+                    "price": "0.026",
+                    "hourlyCost": "0.052",
+                    "monthlyCost": "37.96",
+                    "priceNotFound": false
+                  },
+                  {
+                    "name": "CPU credits",
+                    "unit": "vCPU-hours",
+                    "hourlyQuantity": "0",
+                    "monthlyQuantity": "0",
+                    "price": "0.05",
+                    "hourlyCost": "0",
+                    "monthlyCost": "0",
+                    "priceNotFound": false
+                  }
+                ],
+                "subresources": [
+                  {
+                    "name": "block_device_mapping[0]",
+                    "metadata": {},
+                    "hourlyCost": "0.00749589041095890336",
+                    "monthlyCost": "5.472",
+                    "costComponents": [
+                      {
+                        "name": "Storage (general purpose SSD, gp3)",
+                        "unit": "GB",
+                        "hourlyQuantity": "0.0821917808219178",
+                        "monthlyQuantity": "60",
+                        "price": "0.0912",
+                        "hourlyCost": "0.00749589041095890336",
+                        "monthlyCost": "5.472",
+                        "priceNotFound": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "aws_lb.app",
+            "resourceType": "aws_lb",
+            "tags": {
+              "Design": "C",
+              "Name": "design-c-alb"
+            },
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb.app",
+                  "endLine": 114,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 104
+                }
+              ],
+              "checksum": "170e0ed40ebcecc0b89bef9c9313206d725a21341445f3a8ae64713147d60be6",
+              "endLine": 114,
+              "filename": "design-c\\main.tf",
+              "startLine": 104
+            },
+            "hourlyCost": "0.023595890410958904",
+            "monthlyCost": "17.225",
+            "monthlyUsageCost": "0.8",
+            "costComponents": [
+              {
+                "name": "Application load balancer",
+                "unit": "hours",
+                "hourlyQuantity": "1",
+                "monthlyQuantity": "730",
+                "price": "0.0225",
+                "hourlyCost": "0.0225",
+                "monthlyCost": "16.425",
+                "priceNotFound": false
+              },
+              {
+                "name": "Load balancer capacity units",
+                "unit": "LCU",
+                "hourlyQuantity": "0.0001876524676299",
+                "monthlyQuantity": "0.136986301369863",
+                "price": "5.84",
+                "hourlyCost": "0.001095890410958904",
+                "monthlyCost": "0.8",
+                "usageBased": true,
+                "priceNotFound": false
+              }
+            ]
+          }
+        ],
+        "freeResources": [
+          {
+            "name": "aws_launch_template.app",
+            "resourceType": "aws_launch_template",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_launch_template.app",
+                  "endLine": 150,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 137
+                }
+              ],
+              "checksum": "8720998dd8fc1025ebc1b448d1b221886d83aa00c5d9c128d7a78080cb7a911e",
+              "endLine": 150,
+              "filename": "design-c\\main.tf",
+              "startLine": 137
+            }
+          },
+          {
+            "name": "aws_lb_listener.http",
+            "resourceType": "aws_lb_listener",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb_listener.http",
+                  "endLine": 132,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 123
+                }
+              ],
+              "checksum": "9b41596ceefdfbfbce1f4322c1c5f096c46d8313e4736d4aa9a94e4535201bb0",
+              "endLine": 132,
+              "filename": "design-c\\main.tf",
+              "startLine": 123
+            }
+          },
+          {
+            "name": "aws_lb_target_group.app",
+            "resourceType": "aws_lb_target_group",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb_target_group.app",
+                  "endLine": 121,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 116
+                }
+              ],
+              "checksum": "b87ef984bd32f7f2f4c8b7b3db460186f8309149c8e5e9ba65cc24cf66a35b5a",
+              "endLine": 121,
+              "filename": "design-c\\main.tf",
+              "startLine": 116
+            }
+          }
+        ],
+        "totalHourlyCost": "0.35268082191780821796",
+        "totalMonthlyCost": "257.457",
+        "totalMonthlyUsageCost": "0.8"
+      },
+      "breakdown": {
+        "resources": [
+          {
+            "name": "aws_db_instance.app",
+            "resourceType": "aws_db_instance",
+            "tags": {
+              "Design": "C",
+              "Name": "design-c-db"
+            },
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_db_instance.app",
+                  "endLine": 187,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 170
+                }
+              ],
+              "checksum": "755c45292fe86098c48cea5daa78594d44e2eaf3f361237afb20c0d50c441efe",
+              "endLine": 187,
+              "filename": "design-c\\main.tf",
+              "startLine": 170
+            },
+            "hourlyCost": "0.2695890410958904106",
+            "monthlyCost": "196.8",
+            "costComponents": [
+              {
+                "name": "Database instance (on-demand, Single-AZ, db.t3.micro)",
+                "unit": "hours",
+                "hourlyQuantity": "1",
+                "monthlyQuantity": "730",
+                "price": "0.026",
+                "hourlyCost": "0.026",
+                "monthlyCost": "18.98",
+                "priceNotFound": false
+              },
+              {
+                "name": "Storage (general purpose SSD, gp3)",
+                "unit": "GB",
+                "hourlyQuantity": "0.0273972602739726",
+                "monthlyQuantity": "20",
+                "price": "0.131",
+                "hourlyCost": "0.0035890410958904106",
+                "monthlyCost": "2.62",
+                "priceNotFound": false
+              },
+              {
+                "name": "Extended support (year 1)",
+                "unit": "vCPU-hours",
+                "hourlyQuantity": "2",
+                "monthlyQuantity": "1460",
+                "price": "0.12",
+                "hourlyCost": "0.24",
+                "monthlyCost": "175.2",
+                "priceNotFound": false
+              }
+            ]
+          },
+          {
+            "name": "aws_autoscaling_group.app",
+            "resourceType": "aws_autoscaling_group",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_autoscaling_group.app",
+                  "endLine": 165,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 152
+                }
+              ],
+              "checksum": "1c6c48fafb9b018af93908e630a24f305280d751cbd15ceba9f8e22a44d27412",
+              "endLine": 165,
+              "filename": "design-c\\main.tf",
+              "startLine": 152
+            },
+            "hourlyCost": "0.05949589041095890336",
+            "monthlyCost": "43.432",
+            "subresources": [
+              {
+                "name": "aws_launch_template.app",
+                "metadata": {},
+                "hourlyCost": "0.05949589041095890336",
+                "monthlyCost": "43.432",
+                "costComponents": [
+                  {
+                    "name": "Instance usage (Linux/UNIX, on-demand, t3.small)",
+                    "unit": "hours",
+                    "hourlyQuantity": "2",
+                    "monthlyQuantity": "1460",
+                    "price": "0.026",
+                    "hourlyCost": "0.052",
+                    "monthlyCost": "37.96",
+                    "priceNotFound": false
+                  },
+                  {
+                    "name": "CPU credits",
+                    "unit": "vCPU-hours",
+                    "hourlyQuantity": "0",
+                    "monthlyQuantity": "0",
+                    "price": "0.05",
+                    "hourlyCost": "0",
+                    "monthlyCost": "0",
+                    "priceNotFound": false
+                  }
+                ],
+                "subresources": [
+                  {
+                    "name": "block_device_mapping[0]",
+                    "metadata": {},
+                    "hourlyCost": "0.00749589041095890336",
+                    "monthlyCost": "5.472",
+                    "costComponents": [
+                      {
+                        "name": "Storage (general purpose SSD, gp3)",
+                        "unit": "GB",
+                        "hourlyQuantity": "0.0821917808219178",
+                        "monthlyQuantity": "60",
+                        "price": "0.0912",
+                        "hourlyCost": "0.00749589041095890336",
+                        "monthlyCost": "5.472",
+                        "priceNotFound": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "aws_lb.app",
+            "resourceType": "aws_lb",
+            "tags": {
+              "Design": "C",
+              "Name": "design-c-alb"
+            },
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb.app",
+                  "endLine": 114,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 104
+                }
+              ],
+              "checksum": "170e0ed40ebcecc0b89bef9c9313206d725a21341445f3a8ae64713147d60be6",
+              "endLine": 114,
+              "filename": "design-c\\main.tf",
+              "startLine": 104
+            },
+            "hourlyCost": "0.023595890410958904",
+            "monthlyCost": "17.225",
+            "monthlyUsageCost": "0.8",
+            "costComponents": [
+              {
+                "name": "Application load balancer",
+                "unit": "hours",
+                "hourlyQuantity": "1",
+                "monthlyQuantity": "730",
+                "price": "0.0225",
+                "hourlyCost": "0.0225",
+                "monthlyCost": "16.425",
+                "priceNotFound": false
+              },
+              {
+                "name": "Load balancer capacity units",
+                "unit": "LCU",
+                "hourlyQuantity": "0.0001876524676299",
+                "monthlyQuantity": "0.136986301369863",
+                "price": "5.84",
+                "hourlyCost": "0.001095890410958904",
+                "monthlyCost": "0.8",
+                "usageBased": true,
+                "priceNotFound": false
+              }
+            ]
+          }
+        ],
+        "freeResources": [
+          {
+            "name": "aws_launch_template.app",
+            "resourceType": "aws_launch_template",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_launch_template.app",
+                  "endLine": 150,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 137
+                }
+              ],
+              "checksum": "8720998dd8fc1025ebc1b448d1b221886d83aa00c5d9c128d7a78080cb7a911e",
+              "endLine": 150,
+              "filename": "design-c\\main.tf",
+              "startLine": 137
+            }
+          },
+          {
+            "name": "aws_lb_listener.http",
+            "resourceType": "aws_lb_listener",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb_listener.http",
+                  "endLine": 132,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 123
+                }
+              ],
+              "checksum": "9b41596ceefdfbfbce1f4322c1c5f096c46d8313e4736d4aa9a94e4535201bb0",
+              "endLine": 132,
+              "filename": "design-c\\main.tf",
+              "startLine": 123
+            }
+          },
+          {
+            "name": "aws_lb_target_group.app",
+            "resourceType": "aws_lb_target_group",
+            "tags": {},
+            "providerSupportsDefaultTags": true,
+            "providerLink": "design-c\\main.tf:19",
+            "metadata": {
+              "calls": [
+                {
+                  "blockName": "aws_lb_target_group.app",
+                  "endLine": 121,
+                  "filename": "design-c\\main.tf",
+                  "startLine": 116
+                }
+              ],
+              "checksum": "b87ef984bd32f7f2f4c8b7b3db460186f8309149c8e5e9ba65cc24cf66a35b5a",
+              "endLine": 121,
+              "filename": "design-c\\main.tf",
+              "startLine": 116
+            }
+          }
+        ],
+        "totalHourlyCost": "0.35268082191780821796",
+        "totalMonthlyCost": "257.457",
+        "totalMonthlyUsageCost": "0.8"
+      },
+      "diff": {
+        "resources": [],
+        "totalHourlyCost": "0",
+        "totalMonthlyCost": "0",
+        "totalMonthlyUsageCost": "0"
+      },
+      "summary": {
+        "totalDetectedResources": 6,
+        "totalSupportedResources": 3,
+        "totalUnsupportedResources": 0,
+        "totalUsageBasedResources": 3,
+        "totalNoPriceResources": 3,
+        "unsupportedResourceCounts": {},
+        "noPriceResourceCounts": {
+          "aws_launch_template": 1,
+          "aws_lb_listener": 1,
+          "aws_lb_target_group": 1
+        }
+      }
+    }
+  ],
+  "totalHourlyCost": "0.465520547945205477",
+  "totalMonthlyCost": "339.83",
+  "totalMonthlyUsageCost": "1.6",
+  "pastTotalHourlyCost": "0.465520547945205477",
+  "pastTotalMonthlyCost": "339.83",
+  "pastTotalMonthlyUsageCost": "1.6",
+  "diffTotalHourlyCost": "0",
+  "diffTotalMonthlyCost": "0",
+  "diffTotalMonthlyUsageCost": "0",
+  "timeGenerated": "2026-11-03T06:09:29.29767Z",
+  "summary": {
+    "totalDetectedResources": 13,
+    "totalSupportedResources": 6,
+    "totalUnsupportedResources": 0,
+    "totalUsageBasedResources": 6,
+    "totalNoPriceResources": 7,
+    "unsupportedResourceCounts": {},
+    "noPriceResourceCounts": {
+      "aws_eip": 1,
+      "aws_launch_template": 2,
+      "aws_lb_listener": 2,
+      "aws_lb_target_group": 2
+    }
+  }
+}

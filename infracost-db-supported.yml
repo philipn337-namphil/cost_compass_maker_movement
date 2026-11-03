@@ -1,0 +1,21 @@
+# =====================================================================
+#  실험 2 · DB 엔진 버전을 바꿨을 때  → 보고서 [표 5-5]
+#
+#  기본값(8.0)은 표준 지원이 끝나 확장 지원 요금이 붙는다.
+#  확장 지원 대상이 아닌 버전으로 바꾸면 얼마가 빠지는지 확인한다.
+#
+#  실행:
+#    infracost breakdown --config-file infracost-db-supported.yml --format json --out-file result-db-supported.json
+#    python analyze.py result-db-supported.json
+#
+#  기본 결과인 result.json 의 C안과 비교한다.
+# =====================================================================
+
+version: 0.1
+
+projects:
+  - path: design-c
+    name: C안_확장지원없음
+    usage_file: infracost-usage.yml
+    terraform_vars:
+      db_engine_version: "9.0"

@@ -1,0 +1,23 @@
+# =====================================================================
+#  설계안 3종을 같은 가정으로 한 번에 비교하기 위한 설정 파일
+#
+#  실행:  infracost breakdown --config-file infracost.yml
+#
+#  세 프로젝트가 동일한 usage_file을 참조하도록 하여,
+#  사용량 기반 항목의 가정값을 똑같이 맞춘다. (보고서 4.3 공간 분리)
+# =====================================================================
+
+version: 0.1
+
+projects:
+  - path: design-a
+    name: A안_최소구성
+    usage_file: infracost-usage.yml
+
+  - path: design-b
+    name: B안_가용성구성
+    usage_file: infracost-usage.yml
+
+  - path: design-c
+    name: C안_관리형구성
+    usage_file: infracost-usage.yml
