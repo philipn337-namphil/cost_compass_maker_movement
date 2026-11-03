@@ -23,7 +23,7 @@ Cost Compass
 (학번)  (이름)
 
 담당교수  조명아
-제출일  2026. 11. 4.
+제출일  2026. 11. 3.
 
 저장소  github.com/philipn337-namphil/cost_compass_maker_movement
 ```
