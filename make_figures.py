@@ -46,15 +46,17 @@ FIGDIR.mkdir(exist_ok=True)
 
 
 def _layout(fig, title, xaxis, yaxis, height=520):
+    # 그림 번호와 제목은 보고서의 LaTeX 캡션이 붙인다.
+    # 이미지 안에도 제목을 넣으면 같은 제목이 두 번 보이므로 비워 둔다.
+    # (title 인자는 HTML 파일 이름표 용도로만 남김)
     fig.update_layout(
-        title=title,
+        title=None,
         xaxis_title=xaxis,
         yaxis_title=yaxis,
         template="plotly_white",
         font=dict(family=FONT, size=14),
-        title_font=dict(family=FONT, size=18),
         height=height,
-        margin=dict(t=80, b=60, l=70, r=40),
+        margin=dict(t=40, b=60, l=70, r=40),
     )
     return fig
 
