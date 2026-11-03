@@ -41,6 +41,10 @@ Cost Compass
    2.1 전체 파이프라인
    2.2 Infracost: 설계안을 비용으로 환산한다
    2.3 OpenTofu: 설계안을 코드로 기술한다
+       2.3.1 정의와 역할
+       2.3.2 Terraform이 아니라 OpenTofu를 검토한 이유
+       2.3.3 OpenTofu로 설계안을 검증하다
+       2.3.4 예상하지 못했던 점: Infracost는 OpenTofu 없이도 동작한다
    2.4 pandas · Plotly · Streamlit: 비교하고 보여 준다
    2.5 데이터 처리 경계
    2.6 라이선스 종합과 선정 판단
@@ -161,13 +165,15 @@ Cost Compass는 하나의 오픈소스를 쓰는 것이 아니라, 성격이 다
 
 | 순서 | 오픈소스 | 역할 | 라이선스 |
 |---|---|---|---|
-| ① | **OpenTofu** | 설계안 3종을 코드로 선언 | MPL-2.0 |
+| ① | **OpenTofu** | 설계안 3종을 코드로 선언하고 유효성 검증 | MPL-2.0 |
 | ② | **Infracost** | 코드를 읽어 월 예상 비용 산출 | Apache-2.0 |
-| ③ | **pandas** | JSON을 파싱해 설계안×비용 비교표 생성 | BSD 3-Clause ★ |
-| ④ | **Plotly** | 비용 구성과 비교를 차트로 표현 | MIT ★ |
-| ⑤ | **Streamlit** | 트래픽 슬라이더를 제공해 직접 조작하게 함 | Apache-2.0 ★ |
+| ③ | **pandas** | JSON을 파싱해 설계안×비용 비교표 생성 | BSD 3-Clause |
+| ④ | **Plotly** | 비용 구성과 비교를 차트로 표현 | MIT |
+| ⑤ | **Streamlit** | 트래픽 슬라이더를 제공해 직접 조작하게 함 | Apache-2.0 |
 
-※ ★ 표시한 라이선스는 각 저장소의 LICENSE 파일에서 직접 확인한 뒤 확정하세요. 제출 체크리스트가 요구하는 항목입니다.
+위 라이선스는 2026년 11월 3일, 설치된 패키지의 메타데이터에서 직접 확인하였다(pandas 2.3.2, Plotly 6.9.0, Streamlit 1.66.1).
+
+이와 별도로, 본 보고서의 [그림 2-1]과 [그림 2-2] 다이어그램을 그리는 데 **matplotlib**(3.10.8, PSF 계열 라이선스)을 사용하였다. 도구를 구성하는 부품은 아니므로 위 파이프라인에는 포함하지 않았다.
 
 ## 2.2 Infracost: 설계안을 비용으로 환산한다
 
@@ -188,7 +194,7 @@ Infracost는 **클라우드 인프라를 실제로 배포하지 않고, 코드�
 | 지원 클라우드 | AWS, Azure, Google Cloud |
 | 지원 리소스 | 1,100개 이상 |
 | 제공 형태 | CLI, IDE 확장, CI/CD 풀 리퀘스트 코멘트 |
-| GitHub Star | 약 12.6k ★확인일 기준으로 갱신 |
+| GitHub Star | 약 12.6k (2026년 11월 기준) |
 
 ### 2.2.2 동작 원리
 
@@ -253,7 +259,7 @@ OpenTofu는 인프라를 선언적으로 기술하고 관리하는 코드형 인
 |---|---|
 | 저장소 | github.com/opentofu/opentofu |
 | 라이선스 | Mozilla Public License v2.0 (MPL-2.0) |
-| GitHub Star | 약 30.7k ★확인일 기준으로 갱신 |
+| GitHub Star | 약 30.7k (2026년 11월 기준) |
 | 거버넌스 | Technical Steering Committee 운영 |
 
 ### 2.3.2 Terraform이 아니라 OpenTofu를 검토한 이유
@@ -264,17 +270,38 @@ Terraform은 2023년 8월 라이선스를 BUSL-1.1(Business Source License)로 �
 
 "오픈소스를 활용하라"는 본 과제의 취지에 비추어 보면, 파이프라인의 출발점에 놓이는 도구가 엄밀한 의미의 오픈소스인지 여부는 그냥 넘길 문제가 아니다. 이에 따라 OpenTofu를 우선 선택지로 두었다.
 
-※ ★ 확인 필요: **Infracost가 OpenTofu를 공식 지원하는지 확인하지 못했습니다.** 공식 문서의 OpenTofu 페이지에 접근할 수 없었습니다. 둘 다 같은 HCL 문법을 쓰므로 동작할 가능성이 높지만, 확인 전에는 단정하면 안 됩니다.
->
-> **실제로 돌려 본 뒤 결과에 맞춰 이 절을 확정하세요.**
-> - 동작하면 → 위 서술을 그대로 두고 "실제로 OpenTofu로 파싱되는 것을 확인하였다"를 추가
-> - 동작하지 않으면 → "라이선스 측면에서 OpenTofu가 적합하나 Infracost 호환성 문제로 Terraform을 사용하였다"로 솔직하게 서술. **이 역시 좋은 내용입니다.** 라이선스와 실행 가능성이 충돌할 때 어떻게 판단했는지를 보여 주기 때문입니다.
+### 2.3.3 OpenTofu로 설계안을 검증하다
+
+작성한 설계안이 문법만 그럴듯하고 실제로는 성립하지 않는 설정일 수 있으므로, OpenTofu 1.13.1로 세 설계안을 모두 검사하였다.
+
+[표 2-5] OpenTofu 검증 결과
+
+| 명령 | 확인하는 것 | A안 | B안 | C안 |
+|---|---|---|---|---|
+| `tofu fmt -check` | HCL 문법과 표준 서식 | 통과 | 통과 | 통과 |
+| `tofu init` | 필요한 프로바이더 해석 | 통과 | 통과 | 통과 |
+| `tofu validate` | 설정의 유효성(속성·참조·타입) | 통과 | 통과 | 통과 |
+
+### 2.3.4 예상하지 못했던 점: Infracost는 OpenTofu 없이도 동작한다
+
+검증 과정에서 알게 된 사실이 있다. **본 프로젝트의 비용 측정은 OpenTofu를 설치하기 전에 이미 모두 끝나 있었다.** Terraform도 OpenTofu도 설치되지 않은 상태에서 Infracost가 `.tf` 파일을 읽어 비용을 산출한 것이다.
+
+Infracost가 **자체 HCL 파서를 내장**하고 있기 때문이다. 2.2.2에서 "코드를 로컬에서 파싱한다"고 서술한 것이 이 의미이며, 파싱을 위해 IaC 도구를 따로 설치할 필요가 없다.
+
+이 성질은 본 프로젝트의 사용자에게 특히 유리하다. 비용을 비교해 보려는 학생이 설치해야 하는 것은 Infracost 하나뿐이고, IaC 도구 설치와 프로바이더 내려받기(수백 MB)를 건너뛸 수 있다. 1.2에서 밝힌 "진입 장벽" 관점에서 의미 있는 차이다.
+
+따라서 두 도구의 역할은 서로 다르며 대체 관계가 아니다.
+
+| 도구 | 역할 | 없으면 |
+|---|---|---|
+| OpenTofu | 설계안이 **유효한 설정인지 검증** | 잘못된 설정을 모른 채 비용만 계산하게 된다 |
+| Infracost | 설계안의 **비용을 산출** | 비교 자체가 불가능하다 |
 
 ## 2.4 pandas · Plotly · Streamlit: 비교하고 보여 준다
 
 Infracost가 내놓는 것은 설계안 **하나**에 대한 JSON이다. 이를 여러 설계안에 걸쳐 비교 가능한 형태로 바꾸고 학생이 조작할 수 있게 만드는 것이 나머지 세 도구의 역할이다.
 
-[표 2-5] 후속 처리 도구의 역할
+[표 2-6] 후속 처리 도구의 역할
 
 | 오픈소스 | 원래 용도 | Cost Compass에서의 역할 |
 |---|---|---|
@@ -288,7 +315,7 @@ Infracost가 내놓는 것은 설계안 **하나**에 대한 JSON이다. 이를 
 
 오픈소스를 사용할 때에는 내 데이터가 어디까지 외부로 나가는지 확인해야 한다. Cost Compass의 다섯 도구 가운데 외부와 통신하는 것은 **Infracost뿐**이며, 나머지는 모두 로컬에서 동작한다.
 
-[표 2-6] 외부로 전송되는 것과 전송되지 않는 것 (Infracost 기준)
+[표 2-7] 외부로 전송되는 것과 전송되지 않는 것 (Infracost 기준)
 
 | 구분 | 항목 |
 |---|---|
@@ -302,15 +329,15 @@ Infracost가 내놓는 것은 설계안 **하나**에 대한 JSON이다. 이를 
 
 ## 2.6 라이선스 종합과 선정 판단
 
-[표 2-7] 사용한 오픈소스의 라이선스
+[표 2-8] 사용한 오픈소스의 라이선스
 
 | 오픈소스 | 라이선스 | 성격 | 본 프로젝트 사용에 제약 |
 |---|---|---|---|
 | OpenTofu | MPL-2.0 | 파일 단위 약한 카피레프트 | 없음 (수정 없이 사용) |
 | Infracost | Apache-2.0 | 허용적, 특허 조항 포함 | 없음 |
-| pandas | BSD 3-Clause ★ | 허용적 | 없음 |
-| Plotly | MIT ★ | 허용적 | 없음 |
-| Streamlit | Apache-2.0 ★ | 허용적 | 없음 |
+| pandas | BSD 3-Clause | 허용적 | 없음 |
+| Plotly | MIT | 허용적 | 없음 |
+| Streamlit | Apache-2.0 | 허용적 | 없음 |
 
 다섯 도구 모두 수정 없이 호출하여 사용하였으므로, 출처와 라이선스를 참고문헌에 표기하는 것으로 의무를 충족한다. 수업 과제 제출 및 공개 저장소 게시에 제약이 없다.
 
@@ -462,7 +489,9 @@ SCAMPER가 제시한 방향을 따라 구체적인 아이디어를 발산하였�
 
 ## 4.5 최종 아이디어: Cost Compass
 
-[그림 4-1] Cost Compass 화면 구성 ★ (스케치 또는 실제 화면 캡처)
+[그림 4-1] Cost Compass 화면 구성 → `fig_4_1_screen.png`
+
+왼쪽 사이드바에서 월 데이터 전송량과 인스턴스 타입을 바꾸면, 오른쪽의 설계안별 비용과 증감률이 즉시 다시 계산된다. 설계안 코드(`.tf`)는 그대로 둔 채 사용량 가정만 조작한다는 점에서, 4.3에서 채택한 **공간 분리가 화면에 그대로 구현되어 있다.**
 
 **구성**
 
@@ -515,7 +544,7 @@ SCAMPER가 제시한 방향을 따라 구체적인 아이디어를 발산하였�
 
 **(1) 설계안 코드화**
 
-각 설계안을 `design-a/`, `design-b/`, `design-c/` 디렉터리에 HCL로 작성하였다. 비용 추정 전용이므로 provider 블록에 자격 증명 검증을 건너뛰도록 설정하고, VPC·서브넷은 조회하지 않고 변수 기본값으로 두었다. 그 결과 **AWS 계정 없이, 아무것도 배포하지 않고** 비용이 산출된다.
+각 설계안을 `design-a/`, `design-b/`, `design-c/` 디렉터리에 HCL로 작성하고, OpenTofu로 `fmt`·`init`·`validate`를 통과시켰다(2.3.3). 비용 추정 전용이므로 provider 블록에 자격 증명 검증을 건너뛰도록 설정하고, VPC·서브넷은 조회하지 않고 변수 기본값으로 두었다. 그 결과 **AWS 계정 없이, 아무것도 배포하지 않고** 비용이 산출된다.
 
 **(2) 공통 가정 적용**
 
@@ -536,7 +565,7 @@ python analyze.py result.json
 | 월 데이터 전송량 | 100 GB (세 설계안 공통) |
 | 인스턴스 타입 | t3.small (표 5-4에서는 t3.large) |
 | DB 엔진 | MySQL 8.0 (표 5-5에서는 9.0) |
-| 측정일 | 2026. 11. ★ |
+| 측정일 | 2026. 11. 3. |
 
 여기서 사용한 설정 파일과 실행 명령, 그리고 아래 5.3의 숫자가 나온 **측정 결과 원본(JSON)** 은 모두 공개 저장소에 올려 두었다(6.2 참조). 따라서 본 장의 수치는 독자가 직접 재현하거나 원본과 대조해 확인할 수 있다.
 
@@ -755,22 +784,21 @@ Savings Plans, Reserved Instance, 프리 티어 등 실제 청구에 큰 영향�
 
 ```
 [1] Infracost, "Infracost: Cloud cost estimates for Terraform",
-    https://github.com/infracost/infracost (Apache License 2.0), 접속일: 2026. 11. ★
+    https://github.com/infracost/infracost (Apache License 2.0), 접속일: 2026. 11. 3.
 
 [2] Infracost, "Infracost Documentation", https://www.infracost.io/docs/ ,
-    접속일: 2026. 11. ★
+    접속일: 2026. 11. 3.
 
 [3] OpenTofu, "OpenTofu", https://github.com/opentofu/opentofu (MPL-2.0),
-    접속일: 2026. 11. ★
+    접속일: 2026. 11. 3.
 
 [4] The pandas development team, "pandas",
-    https://github.com/pandas-dev/pandas (BSD 3-Clause ★), 접속일: 2026. 11. ★
+    https://github.com/pandas-dev/pandas (BSD 3-Clause), 접속일: 2026. 11. 3.
 
-[5] Plotly, "plotly.py", https://github.com/plotly/plotly.py (MIT ★),
-    접속일: 2026. 11. ★
+[5] Plotly, "plotly.py", https://github.com/plotly/plotly.py (MIT), 접속일: 2026. 11. 3.
 
 [6] Streamlit, "Streamlit", https://github.com/streamlit/streamlit
-    (Apache License 2.0 ★), 접속일: 2026. 11. ★
+    (Apache License 2.0), 접속일: 2026. 11. 3.
 
 [7] C. Anderson, 『메이커스: 새로운 수요를 만드는 사람들』, 알에이치코리아, 2012.
 

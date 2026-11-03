@@ -55,6 +55,12 @@ Infracost는 클라우드 계정에 접속하지 않고 **코드만 로컬에서
 
 ---
 
+![Cost Compass 화면](fig_4_1_screen.png)
+
+왼쪽 슬라이더로 트래픽과 인스턴스 타입을 바꾸면 세 설계안의 비용이 즉시 다시 계산된다. 설계안 코드는 그대로 두고 **사용량 가정만** 바꾸는 구조다.
+
+---
+
 ## 비교한 설계안
 
 같은 웹 서비스를 올린다고 가정하고, 가용성 수준만 다르게 했다.
@@ -168,6 +174,7 @@ streamlit run app.py
 ├── app.py                          Streamlit 화면
 ├── result*.json                    실제 측정 결과 (재현 검증용)
 ├── fig_2_*.png                     파이프라인 · Infracost 동작 흐름
+├── fig_4_1_screen.png              Streamlit 화면
 ├── fig_5_*.png                     측정 결과 차트
 └── docs/
     ├── report.md                   보고서 본문
