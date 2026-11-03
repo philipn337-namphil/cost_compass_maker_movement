@@ -32,6 +32,8 @@ for _s in (sys.stdout, sys.stderr):
         pass
 
 ROOT = Path(__file__).parent
+FIGDIR = ROOT / "figure"
+FIGDIR.mkdir(exist_ok=True)
 
 # --- 한글 폰트 -------------------------------------------------------
 _KOREAN = r"C:\Windows\Fonts\malgun.ttf"
@@ -92,7 +94,7 @@ def canvas(w, h):
 
 
 def save(fig, name):
-    out = ROOT / f"{name}.png"
+    out = FIGDIR / f"{name}.png"
     fig.savefig(out, dpi=200, bbox_inches="tight", facecolor="white")
     plt.close(fig)
     print(f"  저장: {out.name}")

@@ -26,3 +26,16 @@ venv/
 # OS
 Thumbs.db
 .DS_Store
+
+# LaTeX 컴파일 부산물
+*.aux
+*.log
+*.out
+*.toc
+*.lot
+*.lof
+*.bbl
+*.blg
+*.synctex.gz
+*.fls
+*.fdb_latexmk

@@ -41,6 +41,8 @@ PALETTE = ["#4C78A8", "#E4A14B", "#72B06B", "#B06B8F", "#8F7FB8", "#9C9C9C"]
 ACCENT_RED = "#C0504D"
 
 ROOT = Path(__file__).parent
+FIGDIR = ROOT / "figure"
+FIGDIR.mkdir(exist_ok=True)
 
 
 def _layout(fig, title, xaxis, yaxis, height=520):
@@ -58,10 +60,10 @@ def _layout(fig, title, xaxis, yaxis, height=520):
 
 
 def _save(fig, name):
-    html = ROOT / f"{name}.html"
+    html = FIGDIR / f"{name}.html"
     fig.write_html(html)
     try:
-        png = ROOT / f"{name}.png"
+        png = FIGDIR / f"{name}.png"
         fig.write_image(png, scale=2, width=1000, height=fig.layout.height or 520)
         print(f"  저장: {png.name}  /  {html.name}")
     except Exception as exc:
