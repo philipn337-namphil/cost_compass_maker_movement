@@ -190,7 +190,7 @@ streamlit run app.py
 main.tex        조판 소스 (표 28개, 그림 6장, 번호 체계, 상호참조)
 refer.bib       참고문헌 10건
 figure/         본문에 들어가는 그림
-docs/report.md  같은 내용의 마크다운 원고
+docs/report.md  분량을 줄이기 전의 전체 원고 (마크다운)
 ```
 
 **Overleaf에서 컴파일하려면** 저장소 전체를 zip으로 받아 업로드한다. `main.tex`가 자동으로 메인 문서로 잡힌다. 컴파일러는 **pdfLaTeX**(한글은 `kotex`)이고, 참고문헌이 있으므로 **두 번 이상** 돌려야 번호가 맞는다.

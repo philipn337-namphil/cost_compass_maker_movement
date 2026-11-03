@@ -174,13 +174,7 @@
 
 \subsection{보고서의 구성}
 
-본 보고서는 1.1에서 제시한 세 가지 변화를 차례로 따라간다.
-
-2장에서는 프로젝트를 구성하는 오픈소스 다섯 가지와 그 연결 구조, 라이선스를 정리한다. 3장에서는 관점 바꾸기와 5 Whys로 근본 원인을 찾고 물리적 모순으로 정의하여 `진짜 문제'를 한 문장으로 도출한다. 여기까지가 \textbf{겪은 불편을 만들 것으로 바꾸는 과정}, 즉 소비자에서 생산자로의 전환에 해당한다.
-
-4장에서는 SCAMPER로 발산 방향을 잡고, 브레인스토밍으로 후보를 나열한 뒤, TRIZ 분리 원리로 모순을 해소하고, 가중 순위 결정법으로 최종안을 선택한다. 5장에서는 그 아이디어를 실제로 만들어 측정한 결과와 한계를 밝힌다. 이 두 장이 \textbf{아이디어에서 프로토타입으로}의 전환이다.
-
-6장에서는 결과를 정리하고, 만든 것을 공개 저장소로 돌려놓은 과정을 다룬다. \textbf{혼자에서 함께로}의 전환이며, 1.1에서 시작한 이야기가 닫히는 지점이다.
+본 보고서는 표~\ref{tab:maker}의 세 가지 변화를 차례로 따라간다. 2장에서 사용한 오픈소스를 정리하고 3장에서 문제를 정의한다(소비자에서 생산자로). 4장과 5장에서는 아이디어를 도출해 실제로 만들어 측정하고(아이디어에서 프로토타입으로), 6장에서 만든 것을 공개 저장소로 돌려놓는다(혼자에서 함께로).
 
 % =====================================================================
 \section{사용한 오픈소스}
@@ -189,11 +183,11 @@
 
 수업에서는 메이커 운동을 이끈 세 가지 힘으로 \textbf{ICT 발전과 오픈소스}, \textbf{3D 프린터}, \textbf{메이커 스페이스}를 들었다. 본 프로젝트는 이 가운데 첫 번째에 전적으로 기대고 있다. 남이 공개한 코드를 가져다 쓸 수 있었기 때문에, 개인이 가격 데이터베이스를 구축하거나 HCL 파서를 직접 작성하지 않고도 도구를 만들 수 있었다.
 
-Cost Compass는 하나의 오픈소스를 쓰는 것이 아니라, 성격이 다른 다섯 개를 \textbf{설계안에서 화면까지 이어지는 한 줄기}로 연결하여 만들어진다.
+Cost Compass는 하나의 오픈소스를 쓰는 것이 아니라, 성격이 다른 다섯 개를 \textbf{설계안에서 화면까지 이어지는 한 줄기}로 연결하여 만들어진다(그림~\ref{fig:pipeline}).
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.88\linewidth]{figure/fig_2_1_pipeline.png}
+\includegraphics[width=0.78\linewidth]{figure/fig_2_1_pipeline.png}
 \caption{Cost Compass의 오픈소스 파이프라인}
 \label{fig:pipeline}
 \end{figure}
@@ -218,18 +212,13 @@ Cost Compass는 하나의 오픈소스를 쓰는 것이 아니라, 성격이 다
 
 위 라이선스는 2026년 11월 3일, 설치된 패키지의 메타데이터에서 직접 확인하였다(pandas 2.3.2, Plotly 6.9.0, Streamlit 1.66.1)~\cite{pandas, plotly, streamlit}.
 
-이와 별도로, 본 보고서의 그림~\ref{fig:pipeline}과 그림~\ref{fig:flow} 다이어그램을 그리는 데 \textbf{matplotlib}(3.10.8, PSF 계열 라이선스)을 사용하였다. 도구를 구성하는 부품은 아니므로 위 파이프라인에는 포함하지 않았다.
+보고서의 다이어그램은 matplotlib(PSF 계열 라이선스)으로 그렸으며, 도구의 부품은 아니므로 파이프라인에서 제외하였다.
 
 \subsection{Infracost: 설계안을 비용으로 환산한다}
 
 \subsubsection{정의}
 
-Infracost는 \textbf{클라우드 인프라를 실제로 배포하지 않고, 코드만 보고 월 예상 비용을 계산해 주는 오픈소스 도구}이다~\cite{infracostrepo}. Terraform과 같은 코드형 인프라(IaC, Infrastructure as Code) 파일을 입력으로 받아, 그 코드가 배포되었을 때 발생할 비용을 추정하여 출력한다.
-
-\begin{quote}
-\textbf{코드형 인프라(IaC)란?}\\
-서버 $\cdot$ 네트워크 $\cdot$ 데이터베이스 같은 인프라를 콘솔에서 클릭해서 만드는 대신, 설정을 텍스트 파일로 적어 두고 그 파일을 실행해 만드는 방식이다. 같은 파일을 다시 실행하면 같은 인프라가 다시 만들어지므로, 인프라를 소스 코드처럼 관리할 수 있다.
-\end{quote}
+Infracost는 \textbf{클라우드 인프라를 실제로 배포하지 않고, 코드만 보고 월 예상 비용을 계산해 주는 오픈소스 도구}이다~\cite{infracostrepo}. 인프라 설정을 텍스트 파일로 적어 두는 코드형 인프라(IaC, Infrastructure as Code) 파일을 입력으로 받아, 그 코드가 배포되었을 때 발생할 비용을 추정하여 출력한다.
 
 \begin{table}[!h]
 \centering
@@ -257,7 +246,7 @@ Infracost가 비용을 산출하는 과정은 네 단계로 나눌 수 있다. �
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.88\linewidth]{figure/fig_2_2_infracost_flow.png}
+\includegraphics[width=0.78\linewidth]{figure/fig_2_2_infracost_flow.png}
 \caption{Infracost의 비용 산출 흐름}
 \label{fig:flow}
 \end{figure}
@@ -272,7 +261,7 @@ Infracost는 프로젝트를 \textbf{로컬에서 파싱하여} 생성될 리소
 \paragraph{(2) 단가 조회 --- Cloud Pricing API에 묻는다}
 파싱으로 얻은 속성을 조회 조건으로 삼아, Infracost가 운영하는 \textbf{Cloud Pricing API}(\code{pricing.api.infracost.io})에 단가를 질의한다~\cite{infracostdocs}. 조회 조건에는 공급자, 서비스, 제품군, 리전, 인스턴스 타입, 테넌시, 운영체제, 사전 설치 소프트웨어 등이 포함된다. 같은 인스턴스 타입이라도 리전과 운영체제에 따라 단가가 다르므로, 속성의 \textbf{조합 전체}가 매칭 키가 된다.
 
-이 API를 사용하려면 무료 API 키가 필요하다. 조직 단위로 사용자 지정 가격표나 AWS EDP, Azure EA 같은 할인 계약을 등록해 두면 조회 결과에 반영된다.
+이 API를 사용하려면 무료 API 키가 필요하다.
 
 \paragraph{(3) 사용량 가정 --- 코드에 없는 값을 채운다}
 클라우드 요금은 성격이 다른 \textbf{두 종류}로 나뉜다.
@@ -292,20 +281,7 @@ Infracost는 프로젝트를 \textbf{로컬에서 파싱하여} 생성될 리소
 \end{tabularx}
 \end{table}
 
-사용량 기반 항목은 코드에 적혀 있지 않다. 그래서 Infracost는 \textbf{사용량 파일}(\code{infracost-usage.yml})이라는 별도의 YAML 파일로 이 값을 받는다. 사용량 파일을 주지 않으면 미리 정해진 기본값이 적용되는데, 이는 해당 리소스가 \textbf{공짜가 아니라는 사실을 보이기 위한 장치}이다. 아래는 월 처리 데이터를 100GB로 가정한 예이다.
-
-\begin{quote}
-\begin{verbatim}
-version: 0.1
-resource_type_default_usage:
-  aws_lb:
-    processed_bytes_gb: 100
-resource_usage:
-  aws_db_instance.app:
-    additional_backup_storage_gb: 0
-\end{verbatim}
-\end{quote}
-
+사용량 기반 항목은 코드에 적혀 있지 않다. 그래서 Infracost는 \textbf{사용량 파일}(\code{infracost-usage.yml})이라는 별도의 YAML 파일로 이 값을 받는다. 사용량 파일을 주지 않으면 미리 정해진 기본값이 적용되는데, 이는 해당 리소스가 \textbf{공짜가 아니라는 사실을 보이기 위한 장치}이다.
 이 파일은 \code{infracost.yml}에서 \code{usage_file} 키로 참조한다. 주목할 점은 \textbf{이 구조 자체가 4.3에서 적용할 공간 분리의 근거가 된다}는 것이다. 미리 확정해야 하는 부분(리소스 구성)은 \code{.tf} 파일에, 미리 정할 수 없는 부분(트래픽량)은 \code{infracost-usage.yml}에 나누어 둘 수 있도록 Infracost가 이미 설계되어 있다. Cost Compass의 트래픽 슬라이더는 바로 이 파일의 값을 조작한다.
 
 \paragraph{(4) 집계와 출력}
@@ -315,24 +291,7 @@ resource_usage:
 
 \subsubsection{정의와 역할}
 
-OpenTofu는 인프라를 선언적으로 기술하고 관리하는 코드형 인프라 도구이다~\cite{opentofu}. Cost Compass에서는 \textbf{비교할 설계안 3종을 각각 하나의 코드 묶음으로 표현}하고, 그 설정이 유효한지 검증하는 데 쓰인다.
-
-\begin{table}[!h]
-\centering
-\caption{OpenTofu 기본 정보}
-\label{tab:opentofu}
-\footnotesize
-\begin{tabularx}{\textwidth}{l Y}
-\toprule
-\textbf{항목} & \textbf{내용} \\
-\midrule
-저장소 & \code{github.com/opentofu/opentofu} \\
-라이선스 & Mozilla Public License v2.0 (MPL-2.0) \\
-GitHub Star & 약 30.7k (2026년 11월 기준) \\
-거버넌스 & Technical Steering Committee 운영 \\
-\bottomrule
-\end{tabularx}
-\end{table}
+OpenTofu는 인프라를 선언적으로 기술하고 관리하는 코드형 인프라 도구이다~\cite{opentofu}. Cost Compass에서는 \textbf{비교할 설계안 3종을 각각 하나의 코드 묶음으로 표현}하고, 그 설정이 유효한지 검증하는 데 쓰인다. 저장소는 \code{github.com/opentofu/opentofu}이며 Technical Steering Committee가 운영한다(GitHub Star 약 30.7k, 2026년 11월 기준).
 
 \subsubsection{Terraform이 아니라 OpenTofu를 검토한 이유}
 
@@ -364,45 +323,13 @@ Terraform은 2023년 8월 라이선스를 BUSL-1.1(Business Source License)로 �
 
 \subsubsection{예상하지 못했던 점: Infracost는 OpenTofu 없이도 동작한다}
 
-검증 과정에서 알게 된 사실이 있다. \textbf{본 프로젝트의 비용 측정은 OpenTofu를 설치하기 전에 이미 모두 끝나 있었다.} Terraform도 OpenTofu도 설치되지 않은 상태에서 Infracost가 \code{.tf} 파일을 읽어 비용을 산출한 것이다.
+검증 과정에서 알게 된 사실이 있다. \textbf{본 프로젝트의 비용 측정은 OpenTofu를 설치하기 전에 이미 모두 끝나 있었다.} Infracost가 \textbf{자체 HCL 파서를 내장}하고 있어, Terraform이나 OpenTofu 없이도 \code{.tf} 파일을 읽기 때문이다. 비용을 비교해 보려는 학생은 Infracost 하나만 설치하면 되고 프로바이더 내려받기(수백 MB)도 건너뛸 수 있으므로, 1.2에서 말한 진입 장벽이 그만큼 낮아진다.
 
-Infracost가 \textbf{자체 HCL 파서를 내장}하고 있기 때문이다. 2.2.2에서 ``코드를 로컬에서 파싱한다''고 서술한 것이 이 의미이며, 파싱을 위해 IaC 도구를 따로 설치할 필요가 없다.
-
-이 성질은 본 프로젝트의 사용자에게 특히 유리하다. 비용을 비교해 보려는 학생이 설치해야 하는 것은 Infracost 하나뿐이고, IaC 도구 설치와 프로바이더 내려받기(수백 MB)를 건너뛸 수 있다. 1.2에서 밝힌 진입 장벽 관점에서 의미 있는 차이다.
-
-따라서 두 도구의 역할은 서로 다르며 대체 관계가 아니다.
-
-\begin{center}
-\footnotesize
-\begin{tabularx}{0.95\textwidth}{l Y Y}
-\toprule
-\textbf{도구} & \textbf{역할} & \textbf{없으면} \\
-\midrule
-OpenTofu  & 설계안이 \textbf{유효한 설정인지 검증} & 잘못된 설정을 모른 채 비용만 계산하게 된다 \\
-Infracost & 설계안의 \textbf{비용을 산출}         & 비교 자체가 불가능하다 \\
-\bottomrule
-\end{tabularx}
-\end{center}
+따라서 두 도구는 대체 관계가 아니다. OpenTofu는 설계안이 \textbf{유효한 설정인지 검증}하고, Infracost는 그 설계안의 \textbf{비용을 산출}한다. OpenTofu 없이는 잘못된 설정을 모른 채 비용만 계산하게 되고, Infracost 없이는 비교 자체가 불가능하다.
 
 \subsection{pandas, Plotly, Streamlit: 비교하고 보여 준다}
 
-Infracost가 내놓는 것은 설계안 \textbf{하나}에 대한 JSON이다. 이를 여러 설계안에 걸쳐 비교 가능한 형태로 바꾸고 학생이 조작할 수 있게 만드는 것이 나머지 세 도구의 역할이다.
-
-\begin{table}[!h]
-\centering
-\caption{후속 처리 도구의 역할}
-\label{tab:posttools}
-\footnotesize
-\begin{tabularx}{\textwidth}{l Y Y}
-\toprule
-\textbf{오픈소스} & \textbf{원래 용도} & \textbf{Cost Compass에서의 역할} \\
-\midrule
-\textbf{pandas} & 표 형태 데이터의 가공과 분석 & 설계안 3종의 JSON을 하나의 표로 합치고, 리소스별 비용 기여도와 A안 대비 증감을 계산 \\
-\textbf{Plotly} & 대화형 데이터 시각화 & 설계안별 비용 구성을 누적 막대그래프로, 가정에 따른 비용 변화를 그래프로 표현 \\
-\textbf{Streamlit} & 파이썬 스크립트를 웹 앱으로 전환 & 트래픽 슬라이더를 제공하여, 학생이 가정을 바꿔 가며 비용 변화를 직접 확인하게 함 \\
-\bottomrule
-\end{tabularx}
-\end{table}
+Infracost가 내놓는 것은 설계안 \textbf{하나}에 대한 JSON이다. 나머지 세 도구가 이를 비교 가능한 형태로 바꾼다. \textbf{pandas}는 세 설계안의 JSON을 하나의 표로 합쳐 리소스별 기여도와 A안 대비 증감을 계산하고, \textbf{Plotly}는 이를 차트로 그리며, \textbf{Streamlit}은 학생이 가정을 직접 바꿔 볼 수 있는 화면을 제공한다.
 
 \textbf{Streamlit을 쓰는 이유는 단순히 화면이 필요해서가 아니다.} 1.2에서 규정했듯 이 프로젝트가 다루는 것은 \textbf{불안}이다. 불안은 고정된 표 하나로는 풀리지 않는다. ``트래픽이 이보다 늘면 어떻게 되지?''라는 의문이 남는 한 학생은 여전히 확신 없이 선택하게 된다. 슬라이더를 직접 움직여 가정에 따라 금액이 어떻게 움직이는지 눈으로 확인할 때, 비로소 비용은 불안의 원인이 아니라 판단의 근거가 된다.
 
@@ -433,25 +360,7 @@ Infracost가 내놓는 것은 설계안 \textbf{하나}에 대한 JSON이다. �
 
 \subsection{라이선스 종합과 선정 판단}
 
-\begin{table}[!h]
-\centering
-\caption{사용한 오픈소스의 라이선스}
-\label{tab:licenses}
-\footnotesize
-\begin{tabularx}{\textwidth}{l l Y Y}
-\toprule
-\textbf{오픈소스} & \textbf{라이선스} & \textbf{성격} & \textbf{본 프로젝트 사용에 제약} \\
-\midrule
-OpenTofu  & MPL-2.0       & 파일 단위 약한 카피레프트 & 없음 (수정 없이 사용) \\
-Infracost & Apache-2.0    & 허용적, 특허 조항 포함   & 없음 \\
-pandas    & BSD 3-Clause  & 허용적                  & 없음 \\
-Plotly    & MIT           & 허용적                  & 없음 \\
-Streamlit & Apache-2.0    & 허용적                  & 없음 \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-다섯 도구 모두 수정 없이 호출하여 사용하였으므로, 출처와 라이선스를 참고문헌에 표기하는 것으로 의무를 충족한다. 수업 과제 제출 및 공개 저장소 게시에 제약이 없다.
+다섯 도구의 라이선스는 표~\ref{tab:oss}와 같이 모두 허용적이거나(Apache-2.0, BSD, MIT) 파일 단위의 약한 카피레프트(MPL-2.0)이다. 모두 수정 없이 호출하여 사용하였으므로, 출처와 라이선스를 참고문헌에 표기하는 것으로 의무를 충족한다. 수업 과제 제출 및 공개 저장소 게시에 제약이 없다.
 
 다만 라이선스만 보고 판단해서는 안 되는 지점이 두 가지 있었다.
 
@@ -679,7 +588,7 @@ Infracost를 원래 용도와 다르게 쓰는가 & 3 & 4 & 4 & 5 \\
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.88\linewidth]{figure/fig_4_1_screen.png}
+\includegraphics[width=0.78\linewidth]{figure/fig_4_1_screen.png}
 \caption{Cost Compass 화면 구성}
 \label{fig:screen}
 \end{figure}
@@ -756,14 +665,6 @@ Infracost를 원래 용도와 다르게 쓰는가 & 3 & 4 & 4 & 5 \\
 \paragraph{(2) 공통 가정 적용}
 \code{infracost.yml}에서 세 프로젝트가 동일한 사용량 파일을 참조하도록 하여, 사용량 기반 항목의 가정을 똑같이 맞추었다.
 
-\begin{quote}
-\begin{verbatim}
-infracost breakdown --config-file infracost.yml \
-          --format json --out-file result.json
-python analyze.py result.json
-\end{verbatim}
-\end{quote}
-
 \begin{table}[!h]
 \centering
 \caption{측정 조건}
@@ -787,7 +688,7 @@ DB 엔진 & MySQL 8.0 (표~\ref{tab:engineversion}에서는 9.0) \\
 여기서 사용한 설정 파일과 실행 명령, 그리고 아래 5.3의 숫자가 나온 \textbf{측정 결과 원본(JSON)}은 모두 공개 저장소에 올려 두었다(6.2 참조). 따라서 본 장의 수치는 독자가 직접 재현하거나 원본과 대조해 확인할 수 있다.
 
 \paragraph{(3) 비교표 생성과 시각화}
-\code{result.json}을 pandas로 읽어 설계안별 총액, 리소스별 비용, A안 대비 증감을 계산하였다. 이때 Infracost JSON은 부모 리소스의 비용이 하위 리소스를 포함하므로, 그대로 합산하면 이중 계산이 된다. 최상위 리소스 합계와 리프 리소스 합계를 각각 구해 Infracost가 보고한 총액과 대조하는 방식으로 이를 처리하였고, 합계가 어긋나면 경고하도록 하였다.
+\code{result.json}을 pandas로 읽어 설계안별 총액, 리소스별 비용, A안 대비 증감을 계산하고, Plotly와 Streamlit으로 시각화하였다. 부모와 하위 리소스의 이중 계산을 막는 처리는 표~\ref{tab:troubles}에 정리하였다.
 
 \subsection{결과}
 
@@ -813,7 +714,7 @@ C안 관리형 구성 & 257.46 & +235.74 (+1085.6\%)   & \code{aws_db_instance.a
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.88\linewidth]{figure/fig_5_1_cost_breakdown.png}
+\includegraphics[width=0.78\linewidth]{figure/fig_5_1_cost_breakdown.png}
 \caption{설계안별 월 예상 비용 구성}
 \label{fig:breakdown}
 \end{figure}
@@ -840,7 +741,7 @@ C안 & 257.46 & 371.34 & +113.88 & +44.2\% \\
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.88\linewidth]{figure/fig_5_2_instance_type.png}
+\includegraphics[width=0.78\linewidth]{figure/fig_5_2_instance_type.png}
 \caption{인스턴스 사양을 올렸을 때의 비용 변화}
 \label{fig:instancefig}
 \end{figure}
@@ -870,7 +771,7 @@ DB 인스턴스 (db.t3.micro, 730시간) & 18.98 & 18.98 & --- \\
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.88\linewidth]{figure/fig_5_3_engine_version.png}
+\includegraphics[width=0.78\linewidth]{figure/fig_5_3_engine_version.png}
 \caption{DB 엔진 버전에 따른 RDS 비용 구성}
 \label{fig:enginefig}
 \end{figure}
@@ -920,7 +821,7 @@ C안은 A안의 11.9배로, 표면적으로는 ``관리형 DB는 감당 못 할 
 이 경험은 강의자료에서 제시한 오픈소스 선정 기준 가운데 \textbf{관리, 즉 최근까지 업데이트가 이어지는가} 항목이 왜 중요한지를 보여 준다. 저장소 자체는 활발히 관리되고 있었음에도(최신 릴리스가 측정 2주 전 공개), 특정 영역의 데이터는 뒤처져 있었다. 따라서 \textbf{표~\ref{tab:engineversion}의 차이 자체는 신뢰할 수 있으나, 어느 버전이 실제 과금 대상인지는 AWS 공식 문서로 교차 확인해야 한다.}
 
 \paragraph{(2) 버전 체계의 불일치}
-CLI는 실행할 때마다 v2.18.3으로 업데이트하라고 안내하였으나, 오픈소스 저장소의 릴리스 목록에는 해당 버전이 없고 v0.10.47이 최신이었다. 2.x 계열이 어떤 경로로 배포되는지는 확인하지 못했다. 이는 2.6에서 지적한 ``라이선스가 허용하는 자유와 실제로 독립적으로 운용할 수 있는 범위가 일치하지 않는다''는 문제와 맞닿아 있다.
+CLI는 v2.18.3으로 업데이트하라고 안내했지만 오픈소스 저장소의 최신 릴리스는 v0.10.47이었고, 2.x 계열이 어떤 경로로 배포되는지는 확인하지 못했다.
 
 \paragraph{(3) 가정값에 대한 민감도}
 사용량 기반 항목은 가정값에 따라 결과가 달라진다. 본 비교는 세 설계안에 같은 가정을 적용하여 \textbf{상대적 순서}를 비교한 것이며, 절대 금액의 정확도를 보장하지 않는다. 특히 t3 계열은 버스터블 인스턴스여서 CPU 크레딧 초과 사용분이 추가로 과금되는데, 본 측정에서는 이를 0으로 가정하였다.
@@ -970,10 +871,8 @@ Savings Plans, Reserved Instance, 프리 티어 등 실제 청구에 큰 영향�
 \textbf{문제} & \textbf{원인과 해결} \\
 \midrule
 \code{--config-file}과 \code{--terraform-var}를 함께 쓰면 실행되지 않음 & 도움말에 ``Cannot be used with path, terraform* or usage-file flags''로 명시되어 있었다. 변수를 명령행 대신 설정 파일의 \code{terraform_vars} 항목으로 넘겨 해결하였다. \\
-사용량 파일의 키 이름이 실제와 달랐음 & 손으로 작성한 초안의 키가 맞지 않았다. \code{--sync-usage-file} 옵션으로 리소스에 맞는 키를 자동 생성한 뒤 값만 수정하였다. \\
 \code{--sync-usage-file} 실행 시 \code{AuthFailure} 경고 & 사용량을 실제 AWS에서 조회해 추정하려다 자격 증명이 없어 실패한 것이다. 비용 계산에는 영향이 없었으며, 오히려 이 도구가 클라우드 자격 증명 없이 동작한다는 점(2.2.2)을 확인해 주는 결과였다. \\
 리소스 비용 합계가 총액의 두 배 가까이 나옴 & 부모 리소스의 비용이 하위 리소스를 포함하는데 둘 다 더하고 있었다. 5.2 (3)의 방식으로 해결하고, 합계가 어긋나면 경고하도록 하였다. \\
-한글 Windows 콘솔에서 스크립트가 중단됨 & cp949 인코딩이 일부 문자를 처리하지 못해 \code{UnicodeEncodeError}가 발생하였다. 표준 출력을 UTF-8로 재설정하여 해결하였다. \\
 화면에서 설정을 바꿔도 이전 결과가 표시됨 & 캐시가 결과 파일 경로만 돌려주는데 모든 설정이 같은 파일을 쓰고 있었다. 설정 조합의 해시를 파일 이름에 넣어 분리하였다. \\
 \bottomrule
 \end{tabularx}
@@ -991,8 +890,6 @@ Savings Plans, Reserved Instance, 프리 티어 등 실제 청구에 큰 영향�
 이를 구현하기 위해 다섯 개의 오픈소스를 하나의 파이프라인으로 연결하였다. OpenTofu로 설계안을 코드화하고, Infracost로 비용을 환산하며, pandas로 비교표를 만들고, Plotly와 Streamlit으로 학생이 직접 조작할 수 있는 화면을 제공하였다.
 
 그 가운데 \textbf{Infracost의 역할이 가장 크게 바뀌었다.} 원래 이 도구는 실무 엔지니어가 이미 작성한 코드의 비용 변화를 \textbf{통제}하기 위한 것이다. 본 프로젝트는 이를 학생이 아직 정하지 않은 설계를 \textbf{선택}하기 위한 것으로 바꾸었다. 비용이 설계 이후에 통보받는 결과가 아니라, 설계를 고르는 기준의 하나가 된 것이다.
-
-실제 측정 과정에서 이 전환의 효용이 예상하지 못한 방식으로 확인되었다. C안의 데이터베이스 비용 가운데 89\%가 관리형 서비스 자체가 아니라 \textbf{표준 지원이 끝난 엔진 버전에 부과되는 확장 지원 요금}이었다(5.3.3). 코드에서는 버전 문자열 한 줄로만 보이지만 월 175달러였고, 이를 모른 채 설계했다면 ``관리형 데이터베이스는 너무 비싸다''는 잘못된 결론에 이르렀을 것이다. 필자 자신이 이 프로젝트가 가정한 사용자였던 셈이며, 도구가 의도한 대로 작동한 사례가 되었다.
 
 이 전환은 학생에게 특히 의미가 있다. 서론에서 밝혔듯 학생이 비용을 몰라서 잃는 것은 돈이 아니라 배울 기회였다. 설계안별 금액을 미리 확인할 수 있게 되면 학생은 \textbf{겁이 아니라 근거로} 선택하게 된다. 본 프로젝트가 궁극적으로 줄이려 한 것은 비용이 아니라, 비용을 몰라서 생기는 \textbf{불안}이다.
 
